@@ -16,10 +16,11 @@ public class App {
         */
 
         //(AccountType accType, Status status, double bal, OverDraft ovD){
-        Accounts accountMan = new Accounts("Micheal Jackson",AccountType.CHECKING,Status.FROZEN,1000.0,OverDraft.ENABBLED);
-        System.out.println(accountMan.deductDebitFromAccount(100.0));
-        System.out.println(accountMan.addCreditToAccount(50.0));
-        System.out.println(accountMan.getBalance());
+        Accounts accountMan = new Accounts("Micheal Jackson",AccountType.CHECKING,Status.OPEN,1000.0,OverDraft.ENABLED);
+        accountMan.deductDebitFromAccount(100.0);
+        accountMan.addTransactions(AccountType.CHECKING,1000.0,"debit");
+       // System.out.println(accountMan.addCreditToAccount(50.0));
+        //System.out.println(accountMan.getBalance());
 
     }
 

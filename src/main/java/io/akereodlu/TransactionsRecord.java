@@ -5,5 +5,15 @@ package io.akereodlu;
  */
 public class TransactionsRecord {
 
-    //Track tansactions such as widthrawals,deposits,transfers,changesto status,name,interest rate
+    //Track transaction such as width,deposits,transfers,changes to status,name,interest rate
+
+    private AccountType typeOfTransactionAccount;
+    private double transactionAmount;
+    String transactionAction;
+
+    public TransactionsRecord(AccountType typeOfTransAcc, double transAmount,String transAction){
+        this.typeOfTransactionAccount = typeOfTransAcc;
+        this.transactionAmount = transAmount;
+        this.transactionAction = transAction;
+    }
 }

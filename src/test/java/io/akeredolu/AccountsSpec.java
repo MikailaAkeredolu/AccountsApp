@@ -23,7 +23,7 @@ public class AccountsSpec {
 
     @Test
     public void getBalanceTestClosed(){
-        Accounts testAccount2 = new Accounts("Jones",AccountType.CHECKING,Status.CLOSED,100.0, OverDraft.AUTOMATIC);
+        Accounts testAccount2 = new Accounts("Jones",AccountType.SAVINGS,Status.CLOSED,100.0, OverDraft.AUTOMATIC);
         double expectedValue = testAccount2.getBalance();
         double actualValue = 0;
         Assert.assertEquals(expectedValue,actualValue,.01);
@@ -31,7 +31,7 @@ public class AccountsSpec {
 
     @Test
     public void getBalanceTestFrozen(){
-        Accounts testAccount3 = new Accounts("Christopher Wallace",AccountType.CHECKING,Status.FROZEN,100.0, OverDraft.AUTOMATIC);
+        Accounts testAccount3 = new Accounts("Christopher Wallace",AccountType.INVESTMENT,Status.FROZEN,100.0, OverDraft.ENABLED);
         double expectedValue = testAccount3.getBalance();
         double actualValue = 0;
         Assert.assertEquals(expectedValue,actualValue,.01);
@@ -63,7 +63,7 @@ public class AccountsSpec {
 
     @Test
     public void reOpenAccountTest(){
-        Accounts testAccount7 = new Accounts("Black Johnson",AccountType.CHECKING,Status.FROZEN,100.0, OverDraft.AUTOMATIC);
+        Accounts testAccount7 = new Accounts("Black Johnson",AccountType.CHECKING,Status.FROZEN,100.0, OverDraft.DISABLED);
         Status expectedValue = testAccount7.reOpenAccount(Status.FROZEN);
         Status actualValue = Status.OPEN;
         Assert.assertEquals(expectedValue,actualValue);
@@ -81,7 +81,7 @@ public class AccountsSpec {
     @Test
     public void overDrawTest(){
         Accounts testAccount9 = new Accounts("OG Bobby Johnson",AccountType.CHECKING,Status.OPEN,0.1, OverDraft.AUTOMATIC);
-        double expectedValue = testAccount9.overDraw(OverDraft.ENABBLED,100.0);
+        double expectedValue = testAccount9.overDraw(OverDraft.ENABLED,100.0);
         double actualValue = testAccount9.getBalance();
         Assert.assertEquals(expectedValue,actualValue,.01);
 

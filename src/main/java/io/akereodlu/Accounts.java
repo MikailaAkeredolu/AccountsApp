@@ -17,8 +17,18 @@ public class Accounts {
     private double credit;
     private Status status;
 
-    //Account number and account type set during account creation
+
+
     //Need an ArrayList to hold transaction history
+
+    ArrayList<TransactionsRecord>recordOfTransactions = new ArrayList<TransactionsRecord>();
+
+    //Method to add transactions to array list
+
+    public void addTransactions(AccountType typeOfTransAcc, double transAmount ,String transAction){
+
+        recordOfTransactions.add(new TransactionsRecord(typeOfTransAcc, transAmount,transAction));
+    }
 
     public Accounts(AccountType accType,String achName){
         accountNumber++;
@@ -45,6 +55,7 @@ public class Accounts {
             return 0;
         }
         return balance;
+
     }
 
     //return Double.toString(balance);
@@ -105,10 +116,10 @@ public class Accounts {
     }
 
     public double overDraw(OverDraft choice, double debitAmount){
-        if(choice == OverDraft.ENABBLED && debitAmount > balance){
+        if(choice == OverDraft.ENABLED && debitAmount > balance){
             denialStatus();
             return balance;
-        }else if(choice == OverDraft.ENABBLED || choice == OverDraft.AUTOMATIC && debitAmount < balance){
+        }else if(choice == OverDraft.ENABLED || choice == OverDraft.AUTOMATIC && debitAmount < balance){
             return balance = balance - debitAmount;
         }else{
             return balance;
