@@ -15,28 +15,27 @@ public class AccountsSpec {
 
     @Test
     public void getBalanceTestOPEN(){
-        Accounts testAccount = new Accounts(AccountType.CHECKING,123,Status.OPEN,100.00, OverDraft.AUTOMATIC);
-        String expectedValue = testAccount.getBalance();
-        String actualValue = "100.00";
-        Assert.assertEquals("My balance should be 100", expectedValue,actualValue);
+        Accounts testAccount1 = new Accounts(AccountType.CHECKING,Status.OPEN,100.0, OverDraft.AUTOMATIC);
+        double expectedValue = testAccount1.getBalance();
+        double actualValue = 100.0;
+        Assert.assertEquals(expectedValue,actualValue,0.1);
     }
 
     @Test
     public void getBalanceTestClosed(){
-        Accounts testAccount = new Accounts(AccountType.CHECKING,123,Status.CLOSED,100.00, OverDraft.AUTOMATIC);
-        String expectedValue = testAccount.getBalance();
-        String actualValue = "Account is closed";
-        Assert.assertEquals("This account should return account is closed ", expectedValue,actualValue);
+        Accounts testAccount2 = new Accounts(AccountType.CHECKING,Status.CLOSED,100.0, OverDraft.AUTOMATIC);
+        double expectedValue = testAccount2.getBalance();
+        double actualValue = 0;
+        Assert.assertEquals(expectedValue,actualValue,0.1);
     }
 
     @Test
     public void getBalanceTestFrozen(){
-        Accounts testAccount = new Accounts(AccountType.CHECKING,123,Status.FROZEN,100.00, OverDraft.AUTOMATIC);
-        String expectedValue = testAccount.getBalance();
-        String actualValue = "Sorry Account is frozen";
-        Assert.assertEquals("This account should return account is frozen ", expectedValue,actualValue);
+        Accounts testAccount3 = new Accounts(AccountType.CHECKING,Status.FROZEN,100.0, OverDraft.AUTOMATIC);
+        double expectedValue = testAccount3.getBalance();
+        double actualValue = 0;
+        Assert.assertEquals(expectedValue,actualValue,0.1);
     }
-
 
 
 }
