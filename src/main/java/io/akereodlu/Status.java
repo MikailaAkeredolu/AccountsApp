@@ -6,3 +6,4 @@ package io.akereodlu;
 public enum Status {
     OPEN, CLOSED, FROZEN
 }
+

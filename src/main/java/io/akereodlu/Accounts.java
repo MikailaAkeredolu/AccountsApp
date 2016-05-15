@@ -11,7 +11,7 @@ public class Accounts {
     private static long accountNumber;
     private  String accountHoldersName;
     OverDraft checkOverdraft;
-    private double interestRate;
+    private double interestRate = .03;
     private double balance;
     private  double debit;
     private double credit;
@@ -19,7 +19,7 @@ public class Accounts {
 
     //Account number and account type set during account creation
     //Need an ArrayList to hold transaction history
-    
+
     public Accounts(AccountType accType,String achName){
         accountNumber++;
         this.accountType = accType;
@@ -28,12 +28,12 @@ public class Accounts {
 
     //Constructor used for testing
 
-    public Accounts(AccountType accType, Status status, double bal, OverDraft ovD){
+    public Accounts(String achName, AccountType accType, Status status, double bal, OverDraft ovD){
+        this.accountHoldersName = achName;
         this.status = status;
         this.balance = bal;
         this.accountType = accType;
         this.checkOverdraft = ovD;
-
     }
 
     //Methods
@@ -58,7 +58,7 @@ public class Accounts {
         }else {
             denialStatus();
         }
-           return 0;
+           return balance;
     }
 
     public double addCreditToAccount(double addMoney){
@@ -69,7 +69,7 @@ public class Accounts {
         }else {
             denialStatus();
         }
-        return 0;
+        return balance;
     }
 
     public void approvalStatus(){
@@ -78,6 +78,41 @@ public class Accounts {
 
     public void denialStatus(){
         System.out.println("Transaction Declined!");
+    }
+
+    public String changeAccountHoldersname(String changeName){
+        if(status != Status.CLOSED){
+            accountHoldersName = changeName;
+            return accountHoldersName;
+        }
+        return "Sorry this is not an active account";
+    }
+
+    public Status reOpenAccount(Status accountStatus){
+
+        if (accountStatus == Status.FROZEN || accountStatus == Status.OPEN){
+            return Status.OPEN;
+        }else{
+            return Status.CLOSED;
+        }
+    }
+
+    public Status closeAccount(){
+        if (balance <= 0 ){
+            return Status.CLOSED;
+        }else
+       return reOpenAccount(Status.FROZEN);
+    }
+
+    public double overDraw(OverDraft choice, double debitAmount){
+        if(choice == OverDraft.ENABBLED && debitAmount > balance){
+            denialStatus();
+            return balance;
+        }else if(choice == OverDraft.ENABBLED || choice == OverDraft.AUTOMATIC && debitAmount < balance){
+            return balance = balance - debitAmount;
+        }else{
+            return balance;
+        }
     }
 
     /*
