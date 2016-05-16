@@ -10,25 +10,16 @@ public class Accounts {
     private AccountType accountType;
     private static long accountNumber;
     private  String accountHoldersName;
-    OverDraft checkOverdraft;
+    private OverDraft checkOverdraft;
     private double interestRate = 10.0;
     private double balance;
     private  double debit;
     private double credit;
     private Status status;
-
-
-
-    //Need an ArrayList to hold transaction history
-
-    ArrayList<Transactions>recordOfTransactions = new ArrayList<Transactions>();
+    private Accounts accountObject1;
+    private Accounts accountObject2;
 
     //Method to add transactions to array list
-
-    public void addTransactions(AccountType typeOfTransAcc, double transAmount ,String transAction){
-
-        recordOfTransactions.add(new Transactions(typeOfTransAcc, transAmount,transAction));
-    }
 
     public Accounts(AccountType accType,String achName){
         accountNumber++;
@@ -38,12 +29,37 @@ public class Accounts {
 
     //Constructor used for testing
 
-    public Accounts(String achName, AccountType accType, Status status, double bal, OverDraft ovD){
+    public Accounts(long accN,String achName, AccountType accType, Status status, double bal, OverDraft ovD){
+        this.accountNumber = accN;
         this.accountHoldersName = achName;
         this.status = status;
         this.balance = bal;
         this.accountType = accType;
         this.checkOverdraft = ovD;
+    }
+
+
+
+    public String transferFunds(String accName1,String accName2, long accNum1,long accNum2, double amount){
+        if((accName1 == accName2) && (accNum1 != accNum2) && (amount < balance)){
+            deductDebitFromAccount(amount);
+            addCreditToAccount(amount);
+            return "Transaction was successful!";
+        }else{
+            return "Transaction was declined";
+        }
+
+    }
+
+
+    //Need an ArrayList to hold transaction history
+
+    ArrayList<Transactions>recordOfTransactions = new ArrayList<Transactions>();
+
+
+    public void addTransactions(AccountType typeOfTransAcc, double transAmount ,String transAction){
+
+        recordOfTransactions.add(new Transactions(typeOfTransAcc, transAmount,transAction));
     }
 
     //Methods
@@ -130,16 +146,6 @@ public class Accounts {
         balance = balance * interestRate;
         return  balance;
     }
-
-    /*
-    public  transferFundsFromSameAccountHolder(Accounts acct1, Accounts acct2){
-        if((acct1.accountHoldersName == acct2.accountHoldersName) && (acct1.accountNumber != acct2. accountNumber)){
-
-        }
-        acct1.deductDebitFromAccount()
-        acct2.addCreditToAccount()
-    }
-    */
 
     //Getters and Setters
     public AccountType getAccountType() {
