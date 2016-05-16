@@ -40,8 +40,8 @@ public class Accounts {
 
 
 
-    public String transferFunds(String accName1,String accName2, long accNum1,long accNum2, double amount){
-        if((accName1 == accName2) && (accNum1 != accNum2) && (amount < balance)){
+    public String transferFunds(Accounts accountObjectDestination, long accNum1,long accNum2, double amount){
+        if((accountHoldersName == accountObjectDestination.accountHoldersName) && (accNum1 != accNum2) && (amount < balance)){
             deductDebitFromAccount(amount);
             addCreditToAccount(amount);
             return "Transaction was successful!";

@@ -10,7 +10,8 @@ public class App {
         Accounts accounts100 = new Accounts(1,"Black Jack Johnson",AccountType.CHECKING,Status.OPEN,100.0,OverDraft.ENABBLED);
         //Accounts accounts200 = new Accounts(2,"Black Jack Johnson",AccountType.CHECKING,Status.OPEN,50.0,OverDraft.ENABBLED);
        // App app = new App();
-        accounts100.transferFunds("Black Jack Johnson","Black Jack Johnson",1,2,30.0);
+       // accounts100.transferFunds("Black Jack Johnson","Black Jack Johnson",1,2,30.0);
+        
 
         //(Accounts accName1,Accounts accName2, Accounts accNum1,Accounts accNum2, double amount)
     }
