@@ -10,8 +10,8 @@ public class Accounts {
     private AccountType accountType;
     private static long accountNumber;
     private  String accountHoldersName;
-    OverDraft checkOverdraft;
     private double interestRate = .03;
+    private OverDraft checkOverdraft;
     private double balance;
     private  double debit;
     private double credit;
@@ -39,6 +39,7 @@ public class Accounts {
     //Constructor used for testing
 
     public Accounts(String achName, AccountType accType, Status status, double bal, OverDraft ovD){
+
         this.accountHoldersName = achName;
         this.status = status;
         this.balance = bal;
@@ -46,8 +47,32 @@ public class Accounts {
         this.checkOverdraft = ovD;
     }
 
-    //Methods
 
+/*
+
+    public String transferFunds(String accName1,String accName2, long accNum1,long accNum2, double amount){
+        if((accName1 == accName2) && (accNum1 != accNum2) && (amount < balance)){
+            deductDebitFromAccount(amount);
+            addCreditToAccount(amount);
+            return "Transaction was successful!";
+        }else{
+            return "Transaction was declined";
+        }
+
+    }
+*/
+
+    //Need an ArrayList to hold transaction history
+/*
+    ArrayList<Transactions>recordOfTransactions = new ArrayList<Transactions>();
+
+
+    public void addTransactions(AccountType typeOfTransAcc, double transAmount ,String transAction){
+
+        recordOfTransactions.add(new Transactions(typeOfTransAcc, transAmount,transAction));
+    }
+
+*/
     public double getBalance()
     {
         if(status != Status.OPEN){
@@ -115,6 +140,105 @@ public class Accounts {
        return reOpenAccount(Status.FROZEN);
     }
 
+    /*
+    public double overDraw(OverDraft choice, double debitAmount){
+        if(choice == OverDraft.ENABLED && debitAmount > balance){
+            denialStatus();
+            return balance;
+        }else {
+            if (choice == OverDraft.ENABLED || choice == OverDraft.AUTOMATIC && debitAmount < balance) {
+                return balance = balance - debitAmount;
+            } else {
+                return balance;
+            }
+        }
+    } */
+
+    public double calculateInterest(){
+        balance = balance * interestRate;
+        return  balance;
+    }
+
+
+    public double overDraw(OverDraft choice, double debitAmount){
+        if(choice == OverDraft.ENABLED && debitAmount > balance){
+            denialStatus();
+            return balance;
+        }else if(choice == OverDraft.ENABLED || choice == OverDraft.AUTOMATIC && debitAmount < balance){
+            return balance = balance - debitAmount;
+        }else{
+            return balance;
+        }
+    }
+/*
+    //Getters and Setters
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
+    }
+    */
+
+    //return Double.toString(balance);
+/*
+
+    public double deductDebitFromAccount(double removeMoney){
+        if(status == Status.OPEN){
+            balance =  balance - removeMoney;
+            approvalStatus();
+            return balance;
+        }else {
+            denialStatus();
+        }
+           return balance;
+    }
+
+    public double addCreditToAccount(double addMoney){
+        if(status == Status.OPEN){
+            balance = balance + addMoney;
+            approvalStatus();
+            return balance;
+        }else {
+            denialStatus();
+        }
+        return balance;
+    }
+/*
+    public void approvalStatus(){
+        System.out.println("Transaction Approved!");
+    }
+
+    public void denialStatus(){
+        System.out.println("Transaction Declined!");
+    }
+
+    public String changeAccountHoldersname(String changeName){
+        if(status != Status.CLOSED){
+            accountHoldersName = changeName;
+            return accountHoldersName;
+        }
+        return "Sorry this is not an active account";
+    }
+
+    public Status reOpenAccount(Status accountStatus){
+
+        if (accountStatus == Status.FROZEN || accountStatus == Status.OPEN){
+            return Status.OPEN;
+        }else{
+            return Status.CLOSED;
+        }
+    }
+
+    public Status closeAccount(){
+        if (balance <= 0 ){
+            return Status.CLOSED;
+        }else
+       return reOpenAccount(Status.FROZEN);
+    }
+
+
     public double overDraw(OverDraft choice, double debitAmount){
         if(choice == OverDraft.ENABLED && debitAmount > balance){
             denialStatus();
@@ -158,10 +282,11 @@ public class Accounts {
         return debit;
     }
 
+
     public void setDebit(double debit) {
         this.debit = debit;
     }
-
+/*
     public double getCredit() {
         return credit;
     }
@@ -169,6 +294,7 @@ public class Accounts {
     public void setCredit(double credit) {
         this.credit = credit;
     }
+    */
 
 
     public Status getStatus() {
@@ -182,14 +308,56 @@ public class Accounts {
     public String getAccountHoldersName() {
         return accountHoldersName;
     }
+/*
+    public void setAccountHoldersName(String accountHoldersName) {
+        this.accountHoldersName = accountHoldersName;
+    }
+    */
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+/*
+    public void setDebit(double debit) {
+        this.debit = debit;
+    }
+    */
+
+    public double getCredit() {
+        return credit;
+    }
+
+    public void setCredit(double credit) {
+        this.credit = credit;
+    }
+
+/*
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+    */
+
+    /*
+    public String getAccountHoldersName() {
+        return accountHoldersName;
+
+    }
+    */
 
     public void setAccountHoldersName(String accountHoldersName) {
         this.accountHoldersName = accountHoldersName;
     }
 
+    /*
     public void setBalance(double balance) {
         this.balance = balance;
     }
+    */
+
 
 
     public static long getAccountNumber() {

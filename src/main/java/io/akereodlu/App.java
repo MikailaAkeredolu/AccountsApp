@@ -1,6 +1,7 @@
 package io.akereodlu;
 
 /**
+<<<<<<< HEAD
  * Created by mikailaakeredolu on 5/14/16.
  */
 public class App {
@@ -23,5 +24,6 @@ public class App {
         //System.out.println(accountMan.getBalance());
 
     }
+
 
 }
