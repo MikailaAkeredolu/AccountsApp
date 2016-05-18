@@ -19,6 +19,8 @@ public class Accounts {
     private Accounts accountObject1;
     private Accounts accountObject2;
 
+   //static ArrayList<Accounts>allAccountsArrayList = new ArrayList<Accounts>();
+
     //Method to add transactions to array list
 
     public Accounts(AccountType accType,String achName){
@@ -40,10 +42,10 @@ public class Accounts {
 
 
 
-    public String transferFunds(Accounts accountObjectDestination, long accNum1,long accNum2, double amount){
-        if((accountHoldersName == accountObjectDestination.accountHoldersName) && (accNum1 != accNum2) && (amount < balance)){
-            deductDebitFromAccount(amount);
-            addCreditToAccount(amount);
+    public String transferFunds(Accounts accountObjectDestination, double amount){
+        if((accountHoldersName == accountObjectDestination.accountHoldersName )  && (amount < balance) && (accountObjectDestination.status == Status.FROZEN)){
+            this.deductDebitFromAccount(amount);
+            accountObjectDestination.addCreditToAccount(amount);
             return "Transaction was successful!";
         }else{
             return "Transaction was declined";
@@ -56,7 +58,7 @@ public class Accounts {
 
     ArrayList<Transactions>recordOfTransactions = new ArrayList<Transactions>();
 
-
+    //Track transactions
     public void addTransactions(AccountType typeOfTransAcc, double transAmount ,String transAction){
 
         recordOfTransactions.add(new Transactions(typeOfTransAcc, transAmount,transAction));
